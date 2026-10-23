@@ -1,0 +1,20 @@
+# Fichiers objets et exécutables : jamais dans le dépôt
+*.o
+*.exe
+*.out
+/demo_matrices
+/test_ex1
+/test_ex2
+/test_ex3
+
+# Fichiers produits par les tests et la démonstration
+/test_ex2_sortie.txt
+/R.txt
+/R2.txt
+vgcore.*
+
+# Dossiers d'éditeur et de système
+.vscode/
+.idea/
+__MACOSX/
+.DS_Store
