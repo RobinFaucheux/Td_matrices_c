@@ -18,6 +18,8 @@ const char *mat_message_erreur(MatErreur code)
 
     /* (1.a) À COMPLÉTER : les cas MAT_ERR_DIMENSIONS et
      *       MAT_ERR_DEPASSEMENT, sur le même modèle que ci-dessus. */
+    case MAT_ERR_DIMENSIONS:  return "dimensions incompatibles";
+    case MAT_ERR_DEPASSEMENT: return "dépassement de capacité des int";
 
     default:                  break;
     }
