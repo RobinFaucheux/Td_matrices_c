@@ -114,6 +114,10 @@ MatErreur mat_lire(FILE *f, Matrice *res)
      *         Matrice tmp;
      *         err = mat_allouer(&tmp, nb_lignes, nb_colonnes);
      *         if (err != MAT_OK) return err;                          */
+    Matrice tmp = MATRICE_VIDE;
+    err = mat_allouer(&tmp, nb_lignes, nb_colonnes);
+    if (err != MAT_OK)
+        return err;
 
 
     /* (2.e) À COMPLÉTER : deux boucles imbriquées (i, puis j) qui lisent
