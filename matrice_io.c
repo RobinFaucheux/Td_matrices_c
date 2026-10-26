@@ -70,6 +70,13 @@ MatErreur mat_ecrire(FILE *f, const Matrice *m)
      *         - si un fprintf renvoie un nombre < 0, ou si fputc
      *           renvoie EOF : return MAT_ERR_ECRITURE;               */
 
+    for (int i = 0; i < m->nb_lignes; i++) {
+        for (int j = 0; j < m->nb_colonnes; j++)
+            if (fprintf(f, j == 0 ? "%d" : " %d", m->coef[i][j]) < 0)
+                return MAT_ERR_ECRITURE;
+        if (fputc('\n', f) == EOF)
+            return MAT_ERR_ECRITURE;
+    }
 
     /* FOURNI : forcer l'écriture du tampon et détecter une erreur. */
     if (fflush(f) == EOF)
