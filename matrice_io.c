@@ -104,6 +104,10 @@ MatErreur mat_lire(FILE *f, Matrice *res)
     /* (2.c) À COMPLÉTER : si nb_lignes ou nb_colonnes n'est pas compris
      *       entre 1 et MAT_DIM_MAX, renvoyer MAT_ERR_FORMAT
      *       (c'est le contenu du fichier qui est faux).               */
+    if (nb_lignes < 1 || nb_lignes > MAT_DIM_MAX
+        || nb_colonnes < 1 || nb_colonnes > MAT_DIM_MAX)
+        return MAT_ERR_FORMAT;
+
 
 
     /* (2.d) À COMPLÉTER : déclarer une matrice LOCALE et l'allouer :
