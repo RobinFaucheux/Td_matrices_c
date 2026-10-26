@@ -124,7 +124,15 @@ MatErreur mat_lire(FILE *f, Matrice *res)
      *       chaque coefficient avec lire_entier(f, &tmp.coef[i][j]).
      *       Si une lecture échoue :
      *         mat_detruire(&tmp);  return err;                        */
-
+    for (int i = 0; i < nb_lignes; i++) {
+        for (int j = 0; j < nb_colonnes; j++) {
+            err = lire_entier(f, &tmp.coef[i][j]);
+            if (err != MAT_OK) {
+                mat_detruire(&tmp);
+                return err;
+            }
+        }
+    }
 
     /* (2.f) À COMPLÉTER : tout a réussi, on transfère le résultat :
      *         *res = tmp;  return MAT_OK;                             */
