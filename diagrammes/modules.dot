@@ -1,0 +1,26 @@
+// Schéma des modules : une flèche = « appelle des fonctions de »
+digraph modules {
+    graph [rankdir=TB, splines=true, nodesep=0.9, ranksep=0.85, pad=0.3, bgcolor="white"];
+    node  [shape=box, style="rounded,filled", fontname="Inter", fontsize=13,
+           color="#1f3a60", penwidth=1.3, fillcolor="#e8eef7", margin="0.22,0.12"];
+    edge  [color="#1f3a60", penwidth=1.1, arrowsize=0.8,
+           fontname="DejaVu Sans Mono", fontsize=10, fontcolor="#333333"];
+
+    main  [label=<<b>main.c</b><br/><font point-size="10">programme de démonstration</font>>, fillcolor="#e3f1e3", color="#2e6b30"];
+    io    [label=<<b>matrice_io</b><br/><font point-size="10">entrées-sorties</font>>];
+    calc  [label=<<b>matrice_calcul</b><br/><font point-size="10">addition, produit</font>>];
+    alloc [label=<<b>matrice_alloc</b><br/><font point-size="10">création, destruction</font>>];
+    mat   [label=<<b>matrice</b><br/><font point-size="10">outils communs</font>>];
+
+    { rank=same; io; calc; }
+    { rank=same; alloc; mat; }
+
+    main -> io    [label="  mat_lire\l  mat_ecrire\l  mat_afficher\l"];
+    main -> calc  [label="  mat_additionner\l  mat_multiplier\l"];
+    main -> alloc [label="mat_detruire  "];
+    main -> mat   [label="  mat_message_erreur"];
+    io   -> alloc [label="  mat_allouer\l  mat_detruire\l"];
+    io   -> mat   [label="mat_est_valide"];
+    calc -> alloc [label="mat_allouer\lmat_detruire\l"];
+    calc -> mat   [label="  mat_est_valide"];
+}

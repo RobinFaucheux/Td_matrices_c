@@ -1,0 +1,37 @@
+// Graphe des inclusions : X -> Y signifie « X contient #include "Y" »
+digraph inclusions {
+    graph [rankdir=TB, splines=true, nodesep=0.45, ranksep=0.8, pad=0.3, bgcolor="white"];
+    node  [shape=box, style="filled", fontname="DejaVu Sans Mono", fontsize=12,
+           color="#1f3a60", penwidth=1.2, margin="0.2,0.1"];
+    edge  [color="#1f3a60", penwidth=1.0, arrowsize=0.75];
+
+    node [fillcolor="#e8eef7"];
+    io_c [label="matrice_io.c"]; alloc_c [label="matrice_alloc.c"];
+    calc_c [label="matrice_calcul.c"]; mat_c [label="matrice.c"];
+    node [fillcolor="#e3f1e3", color="#2e6b30"];
+    main_c [label="main.c"];
+    node [fillcolor="white", color="#1f3a60"];
+    io_h [label="matrice_io.h"]; alloc_h [label="matrice_alloc.h"];
+    calc_h [label="matrice_calcul.h"]; mat_h [label="matrice.h"];
+
+    { rank=same; io_c; alloc_c; calc_c; main_c; }
+    { rank=same; io_h; alloc_h; calc_h; mat_c; }
+
+    io_c   -> io_h;   io_c -> alloc_h;
+    alloc_c -> alloc_h;
+    calc_c -> calc_h; calc_c -> alloc_h;
+    main_c -> io_h; main_c -> alloc_h; main_c -> calc_h; main_c -> mat_h;
+    io_h -> mat_h; alloc_h -> mat_h; calc_h -> mat_h; mat_c -> mat_h;
+
+    // légende
+    subgraph cluster_legende {
+        label=""; color="#cccccc"; style="rounded";
+        node [shape=box, fontname="Inter", fontsize=10, margin="0.12,0.05", width=0, height=0];
+        l1 [label="en-tête", fillcolor="white"];
+        l2 [label="implémentation", fillcolor="#e8eef7"];
+        l3 [label="programme principal", fillcolor="#e3f1e3", color="#2e6b30"];
+        l1 -> l2 -> l3 [style=invis];
+    }
+    { rank=same; mat_h; l1; l2; l3; }
+    mat_h -> l1 [style=invis, minlen=3];
+}
